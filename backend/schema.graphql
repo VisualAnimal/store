@@ -254,6 +254,482 @@ input TagCreateInput {
   posts: PostRelateToManyForCreateInput
 }
 
+type Brand {
+  id: ID!
+  name: String
+  models(where: ModelWhereInput! = {}, orderBy: [ModelOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ModelWhereUniqueInput): [Model!]
+  modelsCount(where: ModelWhereInput! = {}): Int
+  products(where: ProductWhereInput! = {}, orderBy: [ProductOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProductWhereUniqueInput): [Product!]
+  productsCount(where: ProductWhereInput! = {}): Int
+  orderNumber: String
+}
+
+input BrandWhereUniqueInput {
+  id: ID
+}
+
+input BrandWhereInput {
+  AND: [BrandWhereInput!]
+  OR: [BrandWhereInput!]
+  NOT: [BrandWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  models: ModelManyRelationFilter
+  products: ProductManyRelationFilter
+  orderNumber: StringFilter
+}
+
+input ModelManyRelationFilter {
+  every: ModelWhereInput
+  some: ModelWhereInput
+  none: ModelWhereInput
+}
+
+input ProductManyRelationFilter {
+  every: ProductWhereInput
+  some: ProductWhereInput
+  none: ProductWhereInput
+}
+
+input BrandOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  orderNumber: OrderDirection
+}
+
+input BrandUpdateInput {
+  name: String
+  models: ModelRelateToManyForUpdateInput
+  products: ProductRelateToManyForUpdateInput
+  orderNumber: String
+}
+
+input ModelRelateToManyForUpdateInput {
+  disconnect: [ModelWhereUniqueInput!]
+  set: [ModelWhereUniqueInput!]
+  create: [ModelCreateInput!]
+  connect: [ModelWhereUniqueInput!]
+}
+
+input ProductRelateToManyForUpdateInput {
+  disconnect: [ProductWhereUniqueInput!]
+  set: [ProductWhereUniqueInput!]
+  create: [ProductCreateInput!]
+  connect: [ProductWhereUniqueInput!]
+}
+
+input BrandUpdateArgs {
+  where: BrandWhereUniqueInput!
+  data: BrandUpdateInput!
+}
+
+input BrandCreateInput {
+  name: String
+  models: ModelRelateToManyForCreateInput
+  products: ProductRelateToManyForCreateInput
+  orderNumber: String
+}
+
+input ModelRelateToManyForCreateInput {
+  create: [ModelCreateInput!]
+  connect: [ModelWhereUniqueInput!]
+}
+
+input ProductRelateToManyForCreateInput {
+  create: [ProductCreateInput!]
+  connect: [ProductWhereUniqueInput!]
+}
+
+type Model {
+  id: ID!
+  name: String
+  brand: Brand
+  capacities(where: CapacityWhereInput! = {}, orderBy: [CapacityOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: CapacityWhereUniqueInput): [Capacity!]
+  capacitiesCount(where: CapacityWhereInput! = {}): Int
+  colors(where: ColorWhereInput! = {}, orderBy: [ColorOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ColorWhereUniqueInput): [Color!]
+  colorsCount(where: ColorWhereInput! = {}): Int
+  versions(where: VersionWhereInput! = {}, orderBy: [VersionOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: VersionWhereUniqueInput): [Version!]
+  versionsCount(where: VersionWhereInput! = {}): Int
+  products(where: ProductWhereInput! = {}, orderBy: [ProductOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProductWhereUniqueInput): [Product!]
+  productsCount(where: ProductWhereInput! = {}): Int
+  orderNumber: String
+}
+
+input ModelWhereUniqueInput {
+  id: ID
+}
+
+input ModelWhereInput {
+  AND: [ModelWhereInput!]
+  OR: [ModelWhereInput!]
+  NOT: [ModelWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  brand: BrandWhereInput
+  capacities: CapacityManyRelationFilter
+  colors: ColorManyRelationFilter
+  versions: VersionManyRelationFilter
+  products: ProductManyRelationFilter
+  orderNumber: StringFilter
+}
+
+input CapacityManyRelationFilter {
+  every: CapacityWhereInput
+  some: CapacityWhereInput
+  none: CapacityWhereInput
+}
+
+input ColorManyRelationFilter {
+  every: ColorWhereInput
+  some: ColorWhereInput
+  none: ColorWhereInput
+}
+
+input VersionManyRelationFilter {
+  every: VersionWhereInput
+  some: VersionWhereInput
+  none: VersionWhereInput
+}
+
+input ModelOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  orderNumber: OrderDirection
+}
+
+input ModelUpdateInput {
+  name: String
+  brand: BrandRelateToOneForUpdateInput
+  capacities: CapacityRelateToManyForUpdateInput
+  colors: ColorRelateToManyForUpdateInput
+  versions: VersionRelateToManyForUpdateInput
+  products: ProductRelateToManyForUpdateInput
+  orderNumber: String
+}
+
+input BrandRelateToOneForUpdateInput {
+  create: BrandCreateInput
+  connect: BrandWhereUniqueInput
+  disconnect: Boolean
+}
+
+input CapacityRelateToManyForUpdateInput {
+  disconnect: [CapacityWhereUniqueInput!]
+  set: [CapacityWhereUniqueInput!]
+  create: [CapacityCreateInput!]
+  connect: [CapacityWhereUniqueInput!]
+}
+
+input ColorRelateToManyForUpdateInput {
+  disconnect: [ColorWhereUniqueInput!]
+  set: [ColorWhereUniqueInput!]
+  create: [ColorCreateInput!]
+  connect: [ColorWhereUniqueInput!]
+}
+
+input VersionRelateToManyForUpdateInput {
+  disconnect: [VersionWhereUniqueInput!]
+  set: [VersionWhereUniqueInput!]
+  create: [VersionCreateInput!]
+  connect: [VersionWhereUniqueInput!]
+}
+
+input ModelUpdateArgs {
+  where: ModelWhereUniqueInput!
+  data: ModelUpdateInput!
+}
+
+input ModelCreateInput {
+  name: String
+  brand: BrandRelateToOneForCreateInput
+  capacities: CapacityRelateToManyForCreateInput
+  colors: ColorRelateToManyForCreateInput
+  versions: VersionRelateToManyForCreateInput
+  products: ProductRelateToManyForCreateInput
+  orderNumber: String
+}
+
+input BrandRelateToOneForCreateInput {
+  create: BrandCreateInput
+  connect: BrandWhereUniqueInput
+}
+
+input CapacityRelateToManyForCreateInput {
+  create: [CapacityCreateInput!]
+  connect: [CapacityWhereUniqueInput!]
+}
+
+input ColorRelateToManyForCreateInput {
+  create: [ColorCreateInput!]
+  connect: [ColorWhereUniqueInput!]
+}
+
+input VersionRelateToManyForCreateInput {
+  create: [VersionCreateInput!]
+  connect: [VersionWhereUniqueInput!]
+}
+
+type Capacity {
+  id: ID!
+  name: String
+  model: Model
+  products(where: ProductWhereInput! = {}, orderBy: [ProductOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProductWhereUniqueInput): [Product!]
+  productsCount(where: ProductWhereInput! = {}): Int
+  orderNumber: String
+}
+
+input CapacityWhereUniqueInput {
+  id: ID
+}
+
+input CapacityWhereInput {
+  AND: [CapacityWhereInput!]
+  OR: [CapacityWhereInput!]
+  NOT: [CapacityWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  model: ModelWhereInput
+  products: ProductManyRelationFilter
+  orderNumber: StringFilter
+}
+
+input CapacityOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  orderNumber: OrderDirection
+}
+
+input CapacityUpdateInput {
+  name: String
+  model: ModelRelateToOneForUpdateInput
+  products: ProductRelateToManyForUpdateInput
+  orderNumber: String
+}
+
+input ModelRelateToOneForUpdateInput {
+  create: ModelCreateInput
+  connect: ModelWhereUniqueInput
+  disconnect: Boolean
+}
+
+input CapacityUpdateArgs {
+  where: CapacityWhereUniqueInput!
+  data: CapacityUpdateInput!
+}
+
+input CapacityCreateInput {
+  name: String
+  model: ModelRelateToOneForCreateInput
+  products: ProductRelateToManyForCreateInput
+  orderNumber: String
+}
+
+input ModelRelateToOneForCreateInput {
+  create: ModelCreateInput
+  connect: ModelWhereUniqueInput
+}
+
+type Color {
+  id: ID!
+  name: String
+  model: Model
+  products(where: ProductWhereInput! = {}, orderBy: [ProductOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProductWhereUniqueInput): [Product!]
+  productsCount(where: ProductWhereInput! = {}): Int
+  orderNumber: String
+}
+
+input ColorWhereUniqueInput {
+  id: ID
+}
+
+input ColorWhereInput {
+  AND: [ColorWhereInput!]
+  OR: [ColorWhereInput!]
+  NOT: [ColorWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  model: ModelWhereInput
+  products: ProductManyRelationFilter
+  orderNumber: StringFilter
+}
+
+input ColorOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  orderNumber: OrderDirection
+}
+
+input ColorUpdateInput {
+  name: String
+  model: ModelRelateToOneForUpdateInput
+  products: ProductRelateToManyForUpdateInput
+  orderNumber: String
+}
+
+input ColorUpdateArgs {
+  where: ColorWhereUniqueInput!
+  data: ColorUpdateInput!
+}
+
+input ColorCreateInput {
+  name: String
+  model: ModelRelateToOneForCreateInput
+  products: ProductRelateToManyForCreateInput
+  orderNumber: String
+}
+
+type Version {
+  id: ID!
+  name: String
+  model: Model
+  products(where: ProductWhereInput! = {}, orderBy: [ProductOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProductWhereUniqueInput): [Product!]
+  productsCount(where: ProductWhereInput! = {}): Int
+  orderNumber: String
+}
+
+input VersionWhereUniqueInput {
+  id: ID
+}
+
+input VersionWhereInput {
+  AND: [VersionWhereInput!]
+  OR: [VersionWhereInput!]
+  NOT: [VersionWhereInput!]
+  id: IDFilter
+  name: StringFilter
+  model: ModelWhereInput
+  products: ProductManyRelationFilter
+  orderNumber: StringFilter
+}
+
+input VersionOrderByInput {
+  id: OrderDirection
+  name: OrderDirection
+  orderNumber: OrderDirection
+}
+
+input VersionUpdateInput {
+  name: String
+  model: ModelRelateToOneForUpdateInput
+  products: ProductRelateToManyForUpdateInput
+  orderNumber: String
+}
+
+input VersionUpdateArgs {
+  where: VersionWhereUniqueInput!
+  data: VersionUpdateInput!
+}
+
+input VersionCreateInput {
+  name: String
+  model: ModelRelateToOneForCreateInput
+  products: ProductRelateToManyForCreateInput
+  orderNumber: String
+}
+
+type Product {
+  id: ID!
+  price: String
+  brand: Brand
+  model: Model
+  capacity: Capacity
+  color: Color
+  version: Version
+  name: String
+  description: String
+  orderNumber: String
+}
+
+input ProductWhereUniqueInput {
+  id: ID
+}
+
+input ProductWhereInput {
+  AND: [ProductWhereInput!]
+  OR: [ProductWhereInput!]
+  NOT: [ProductWhereInput!]
+  id: IDFilter
+  price: StringFilter
+  brand: BrandWhereInput
+  model: ModelWhereInput
+  capacity: CapacityWhereInput
+  color: ColorWhereInput
+  version: VersionWhereInput
+  name: StringFilter
+  description: StringFilter
+  orderNumber: StringFilter
+}
+
+input ProductOrderByInput {
+  id: OrderDirection
+  price: OrderDirection
+  name: OrderDirection
+  description: OrderDirection
+  orderNumber: OrderDirection
+}
+
+input ProductUpdateInput {
+  price: String
+  brand: BrandRelateToOneForUpdateInput
+  model: ModelRelateToOneForUpdateInput
+  capacity: CapacityRelateToOneForUpdateInput
+  color: ColorRelateToOneForUpdateInput
+  version: VersionRelateToOneForUpdateInput
+  name: String
+  description: String
+  orderNumber: String
+}
+
+input CapacityRelateToOneForUpdateInput {
+  create: CapacityCreateInput
+  connect: CapacityWhereUniqueInput
+  disconnect: Boolean
+}
+
+input ColorRelateToOneForUpdateInput {
+  create: ColorCreateInput
+  connect: ColorWhereUniqueInput
+  disconnect: Boolean
+}
+
+input VersionRelateToOneForUpdateInput {
+  create: VersionCreateInput
+  connect: VersionWhereUniqueInput
+  disconnect: Boolean
+}
+
+input ProductUpdateArgs {
+  where: ProductWhereUniqueInput!
+  data: ProductUpdateInput!
+}
+
+input ProductCreateInput {
+  price: String
+  brand: BrandRelateToOneForCreateInput
+  model: ModelRelateToOneForCreateInput
+  capacity: CapacityRelateToOneForCreateInput
+  color: ColorRelateToOneForCreateInput
+  version: VersionRelateToOneForCreateInput
+  name: String
+  description: String
+  orderNumber: String
+}
+
+input CapacityRelateToOneForCreateInput {
+  create: CapacityCreateInput
+  connect: CapacityWhereUniqueInput
+}
+
+input ColorRelateToOneForCreateInput {
+  create: ColorCreateInput
+  connect: ColorWhereUniqueInput
+}
+
+input VersionRelateToOneForCreateInput {
+  create: VersionCreateInput
+  connect: VersionWhereUniqueInput
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -278,6 +754,42 @@ type Mutation {
   updateTags(data: [TagUpdateArgs!]!): [Tag]
   deleteTag(where: TagWhereUniqueInput!): Tag
   deleteTags(where: [TagWhereUniqueInput!]!): [Tag]
+  createBrand(data: BrandCreateInput!): Brand
+  createBrands(data: [BrandCreateInput!]!): [Brand]
+  updateBrand(where: BrandWhereUniqueInput!, data: BrandUpdateInput!): Brand
+  updateBrands(data: [BrandUpdateArgs!]!): [Brand]
+  deleteBrand(where: BrandWhereUniqueInput!): Brand
+  deleteBrands(where: [BrandWhereUniqueInput!]!): [Brand]
+  createModel(data: ModelCreateInput!): Model
+  createModels(data: [ModelCreateInput!]!): [Model]
+  updateModel(where: ModelWhereUniqueInput!, data: ModelUpdateInput!): Model
+  updateModels(data: [ModelUpdateArgs!]!): [Model]
+  deleteModel(where: ModelWhereUniqueInput!): Model
+  deleteModels(where: [ModelWhereUniqueInput!]!): [Model]
+  createCapacity(data: CapacityCreateInput!): Capacity
+  createCapacities(data: [CapacityCreateInput!]!): [Capacity]
+  updateCapacity(where: CapacityWhereUniqueInput!, data: CapacityUpdateInput!): Capacity
+  updateCapacities(data: [CapacityUpdateArgs!]!): [Capacity]
+  deleteCapacity(where: CapacityWhereUniqueInput!): Capacity
+  deleteCapacities(where: [CapacityWhereUniqueInput!]!): [Capacity]
+  createColor(data: ColorCreateInput!): Color
+  createColors(data: [ColorCreateInput!]!): [Color]
+  updateColor(where: ColorWhereUniqueInput!, data: ColorUpdateInput!): Color
+  updateColors(data: [ColorUpdateArgs!]!): [Color]
+  deleteColor(where: ColorWhereUniqueInput!): Color
+  deleteColors(where: [ColorWhereUniqueInput!]!): [Color]
+  createVersion(data: VersionCreateInput!): Version
+  createVersions(data: [VersionCreateInput!]!): [Version]
+  updateVersion(where: VersionWhereUniqueInput!, data: VersionUpdateInput!): Version
+  updateVersions(data: [VersionUpdateArgs!]!): [Version]
+  deleteVersion(where: VersionWhereUniqueInput!): Version
+  deleteVersions(where: [VersionWhereUniqueInput!]!): [Version]
+  createProduct(data: ProductCreateInput!): Product
+  createProducts(data: [ProductCreateInput!]!): [Product]
+  updateProduct(where: ProductWhereUniqueInput!, data: ProductUpdateInput!): Product
+  updateProducts(data: [ProductUpdateArgs!]!): [Product]
+  deleteProduct(where: ProductWhereUniqueInput!): Product
+  deleteProducts(where: [ProductWhereUniqueInput!]!): [Product]
   endSession: Boolean!
   authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -310,6 +822,24 @@ type Query {
   tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
   tag(where: TagWhereUniqueInput!): Tag
   tagsCount(where: TagWhereInput! = {}): Int
+  brands(where: BrandWhereInput! = {}, orderBy: [BrandOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: BrandWhereUniqueInput): [Brand!]
+  brand(where: BrandWhereUniqueInput!): Brand
+  brandsCount(where: BrandWhereInput! = {}): Int
+  models(where: ModelWhereInput! = {}, orderBy: [ModelOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ModelWhereUniqueInput): [Model!]
+  model(where: ModelWhereUniqueInput!): Model
+  modelsCount(where: ModelWhereInput! = {}): Int
+  capacities(where: CapacityWhereInput! = {}, orderBy: [CapacityOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: CapacityWhereUniqueInput): [Capacity!]
+  capacity(where: CapacityWhereUniqueInput!): Capacity
+  capacitiesCount(where: CapacityWhereInput! = {}): Int
+  colors(where: ColorWhereInput! = {}, orderBy: [ColorOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ColorWhereUniqueInput): [Color!]
+  color(where: ColorWhereUniqueInput!): Color
+  colorsCount(where: ColorWhereInput! = {}): Int
+  versions(where: VersionWhereInput! = {}, orderBy: [VersionOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: VersionWhereUniqueInput): [Version!]
+  version(where: VersionWhereUniqueInput!): Version
+  versionsCount(where: VersionWhereInput! = {}): Int
+  products(where: ProductWhereInput! = {}, orderBy: [ProductOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: ProductWhereUniqueInput): [Product!]
+  product(where: ProductWhereUniqueInput!): Product
+  productsCount(where: ProductWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }

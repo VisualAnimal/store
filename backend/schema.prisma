@@ -36,3 +36,82 @@ model Tag {
   name  String @default("")
   posts Post[] @relation("Post_tags")
 }
+
+model Brand {
+  id          String    @id @default(cuid())
+  name        String    @default("")
+  models      Model[]   @relation("Model_brand")
+  products    Product[] @relation("Product_brand")
+  orderNumber String    @default("")
+}
+
+model Model {
+  id          String     @id @default(cuid())
+  name        String     @default("")
+  brand       Brand?     @relation("Model_brand", fields: [brandId], references: [id])
+  brandId     String?    @map("brand")
+  capacities  Capacity[] @relation("Capacity_model")
+  colors      Color[]    @relation("Color_model")
+  versions    Version[]  @relation("Version_model")
+  products    Product[]  @relation("Product_model")
+  orderNumber String     @default("")
+
+  @@index([brandId])
+}
+
+model Capacity {
+  id          String    @id @default(cuid())
+  name        String    @default("")
+  model       Model?    @relation("Capacity_model", fields: [modelId], references: [id])
+  modelId     String?   @map("model")
+  products    Product[] @relation("Product_capacity")
+  orderNumber String    @default("")
+
+  @@index([modelId])
+}
+
+model Color {
+  id          String    @id @default(cuid())
+  name        String    @default("")
+  model       Model?    @relation("Color_model", fields: [modelId], references: [id])
+  modelId     String?   @map("model")
+  products    Product[] @relation("Product_color")
+  orderNumber String    @default("")
+
+  @@index([modelId])
+}
+
+model Version {
+  id          String    @id @default(cuid())
+  name        String    @default("")
+  model       Model?    @relation("Version_model", fields: [modelId], references: [id])
+  modelId     String?   @map("model")
+  products    Product[] @relation("Product_version")
+  orderNumber String    @default("")
+
+  @@index([modelId])
+}
+
+model Product {
+  id          String    @id @default(cuid())
+  price       String    @default("")
+  brand       Brand?    @relation("Product_brand", fields: [brandId], references: [id])
+  brandId     String?   @map("brand")
+  model       Model?    @relation("Product_model", fields: [modelId], references: [id])
+  modelId     String?   @map("model")
+  capacity    Capacity? @relation("Product_capacity", fields: [capacityId], references: [id])
+  capacityId  String?   @map("capacity")
+  color       Color?    @relation("Product_color", fields: [colorId], references: [id])
+  colorId     String?   @map("color")
+  version     Version?  @relation("Product_version", fields: [versionId], references: [id])
+  versionId   String?   @map("version")
+  name        String    @default("")
+  description String    @default("")
+  orderNumber String    @default("")
+
+  @@index([brandId])
+  @@index([modelId])
+  @@index([capacityId])
+  @@index([colorId])
+  @@index([versionId])
+}

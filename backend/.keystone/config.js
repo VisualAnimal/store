@@ -132,6 +132,71 @@ var lists = {
       // this can be helpful to find out all the Posts associated with a Tag
       posts: (0, import_fields.relationship)({ ref: "Post.tags", many: true })
     }
+  }),
+  Brand: (0, import_core.list)({
+    access: import_access.allowAll,
+    fields: {
+      name: (0, import_fields.text)(),
+      models: (0, import_fields.relationship)({ ref: "Model.brand", many: true }),
+      products: (0, import_fields.relationship)({ ref: "Product.brand", many: true }),
+      orderNumber: (0, import_fields.text)()
+    }
+  }),
+  Model: (0, import_core.list)({
+    access: import_access.allowAll,
+    fields: {
+      name: (0, import_fields.text)(),
+      brand: (0, import_fields.relationship)({ ref: "Brand.models" }),
+      capacities: (0, import_fields.relationship)({ ref: "Capacity.model", many: true }),
+      colors: (0, import_fields.relationship)({ ref: "Color.model", many: true }),
+      versions: (0, import_fields.relationship)({ ref: "Version.model", many: true }),
+      products: (0, import_fields.relationship)({ ref: "Product.model", many: true }),
+      orderNumber: (0, import_fields.text)()
+    }
+  }),
+  Capacity: (0, import_core.list)({
+    access: import_access.allowAll,
+    fields: {
+      name: (0, import_fields.text)(),
+      model: (0, import_fields.relationship)({ ref: "Model.capacities" }),
+      products: (0, import_fields.relationship)({ ref: "Product.capacity", many: true }),
+      orderNumber: (0, import_fields.text)()
+      // products:
+    }
+  }),
+  Color: (0, import_core.list)({
+    access: import_access.allowAll,
+    fields: {
+      name: (0, import_fields.text)(),
+      model: (0, import_fields.relationship)({ ref: "Model.colors" }),
+      products: (0, import_fields.relationship)({ ref: "Product.color", many: true }),
+      orderNumber: (0, import_fields.text)()
+      // products:
+    }
+  }),
+  Version: (0, import_core.list)({
+    access: import_access.allowAll,
+    fields: {
+      name: (0, import_fields.text)(),
+      model: (0, import_fields.relationship)({ ref: "Model.versions" }),
+      products: (0, import_fields.relationship)({ ref: "Product.version", many: true }),
+      orderNumber: (0, import_fields.text)()
+      // products:
+    }
+  }),
+  Product: (0, import_core.list)({
+    access: import_access.allowAll,
+    fields: {
+      price: (0, import_fields.text)(),
+      brand: (0, import_fields.relationship)({ ref: "Brand.products" }),
+      model: (0, import_fields.relationship)({ ref: "Model.products" }),
+      capacity: (0, import_fields.relationship)({ ref: "Capacity.products" }),
+      color: (0, import_fields.relationship)({ ref: "Color.products" }),
+      version: (0, import_fields.relationship)({ ref: "Version.products" }),
+      name: (0, import_fields.text)(),
+      description: (0, import_fields.text)(),
+      orderNumber: (0, import_fields.text)()
+    }
   })
 };
 
@@ -171,6 +236,9 @@ var session = (0, import_session.statelessSessions)({
 // keystone.ts
 var keystone_default = withAuth(
   (0, import_core2.config)({
+    server: {
+      cors: {}
+    },
     db: {
       // we're using sqlite for the fastest startup experience
       //   for more information on what database might be appropriate for you
