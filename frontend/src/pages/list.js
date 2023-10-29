@@ -1,7 +1,7 @@
 import createApolloClient from "../apollo-client"
 import { gql } from "@apollo/client"
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const client = createApolloClient()
     const { data } = await client.query({
         query: gql`
