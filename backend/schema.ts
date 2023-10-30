@@ -152,7 +152,7 @@ export const lists: Lists = {
       name: text(),
       models: relationship({ ref: 'Model.brand', many: true }),
       products: relationship({ ref: 'Product.brand', many: true }),
-      orderNumber: text()
+      updataAt: timestamp()
     }
   }),
   Model: list({
@@ -164,7 +164,7 @@ export const lists: Lists = {
       colors: relationship({ ref: 'Color.model', many: true }),
       versions: relationship({ ref: 'Version.model', many: true }),
       products: relationship({ ref: 'Product.model', many: true }),
-      orderNumber: text()
+      updataAt: timestamp()
     }
   }),
   Capacity: list({
@@ -173,8 +173,7 @@ export const lists: Lists = {
       name: text(),
       model: relationship({ ref: 'Model.capacities' }),
       products: relationship({ ref: 'Product.capacity', many: true }),
-      orderNumber: text()
-      // products:
+      updataAt: timestamp()
     }
   }),
   Color: list({
@@ -183,8 +182,7 @@ export const lists: Lists = {
       name: text(),
       model: relationship({ ref: 'Model.colors' }),
       products: relationship({ ref: 'Product.color', many: true }),
-      orderNumber: text()
-      // products:
+      updataAt: timestamp()
     }
   }),
   Version: list({
@@ -193,8 +191,7 @@ export const lists: Lists = {
       name: text(),
       model: relationship({ ref: 'Model.versions' }),
       products: relationship({ ref: 'Product.version', many: true }),
-      orderNumber: text()
-      // products:
+      updataAt: timestamp()
     }
   }),
   Product: list({
@@ -208,7 +205,7 @@ export const lists: Lists = {
       version: relationship({ ref: 'Version.products' }),
       name: text(),
       description: text(),
-      orderNumber: text()
+      updataAt: timestamp()
     }
   })
 };
