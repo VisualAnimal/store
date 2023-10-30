@@ -2,11 +2,11 @@ import { gql, useQuery } from "@apollo/client"
 
 const GET_BRANDS = gql`
   query Brands {
-    brands(orderBy:{orderNumber: asc}) {
+    brands(orderBy:{updateAt: desc}) {
     	id name products{id}
-    	models(orderBy:{orderNumber: asc}) {
+    	models(orderBy:{updateAt: desc}) {
     		id name products{id}
-    		capacities(orderBy:{orderNumber: asc}) {
+    		capacities(orderBy:{updateAt: desc}) {
         		products{id}
         		products{
 					id

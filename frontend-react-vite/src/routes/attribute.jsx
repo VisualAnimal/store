@@ -2,17 +2,17 @@ import { gql, useMutation, useQuery } from "@apollo/client"
 
 const GET_ATTRIBUTE = gql`
     query GetBrands {
-        brands(orderBy:{orderNumber: asc}) {
+        brands(orderBy:{updateAt: desc}) {
             id name
-            models(orderBy:{orderNumber: asc}) {
+            models(orderBy:{updateAt: desc}) {
                 id name
-                capacities(orderBy:{orderNumber: asc}) {
+                capacities(orderBy:{updateAt: desc}) {
                     id name
                 }
-                colors(orderBy:{orderNumber: asc}){
+                colors(orderBy:{updateAt: desc}){
                     id name
                 }
-                versions(orderBy:{orderNumber: asc}){
+                versions(orderBy:{updateAt: desc}){
                     id name
                 }
             }
