@@ -35,11 +35,21 @@ const ADD_PRODUCT = gql`
         }
     }
 `
+const ADD_PRODUCT_WITH_NOT_VERSION = gql`
+    mutation AddProduct($brand: ID, $model: ID, $capacity: ID, $color: ID, $price: String){
+        createProduct(data: {
+            brand: {connect: {id: $brand}},
+            model: {connect: {id: $model}},
+            capacity: {connect: {id: $capacity}},
+            color: {connect: {id: $color}},
+            price: $price
+        }){
+            id
+        }
+    }
+`
 
 export default function Product() {
-    const { loading, error, data } = useQuery(GET_ATTRIBUTE)
-    const [createProduct] = useMutation(ADD_PRODUCT)
-
     const [attribute, setAttribute] = useState({
         brand: '',
         model: '',
@@ -47,6 +57,16 @@ export default function Product() {
         color: '',
         version: '',
     })
+    const { loading, error, data } = useQuery(GET_ATTRIBUTE)
+    // 允许不添加version
+    let createProduct
+    if (attribute.version) {
+        console.log('yes');
+        createProduct = useMutation(ADD_PRODUCT)[0]
+    }else{
+        console.log('no');
+        createProduct = useMutation(ADD_PRODUCT_WITH_NOT_VERSION)[0]
+    }
 
     // 添加商品
     const handleAddProduct = async () => {
@@ -80,13 +100,13 @@ export default function Product() {
                     <li key={model.id}>{model.name} <span>{attribute.capacity}{attribute.color}{attribute.version}</span> <button onClick={handleAddProduct}>添加</button>
                         <ul>
                             <li>{model.capacities.map(capacity => (
-                                <span key={capacity.id}><button onClick={() => setAttribute(prevState => ({ ...prevState, capacity: capacity.name,capacityId:capacity.id, model: model.id, brand: brand.id }))}>{capacity.name}</button> </span>
+                                <span key={capacity.id}><button onClick={() => setAttribute(prevState => ({ ...prevState, capacity: capacity.name, capacityId: capacity.id, model: model.id, brand: brand.id }))}>{capacity.name}</button> </span>
                             ))}</li>
                             <li>{model.colors.map(color => (
-                                <span key={color.id}><button onClick={() => setAttribute(prevState => ({ ...prevState, color: color.name,colorId:color.id ,model: model.id, brand: brand.id }))}>{color.name}</button> </span>
+                                <span key={color.id}><button onClick={() => setAttribute(prevState => ({ ...prevState, color: color.name, colorId: color.id, model: model.id, brand: brand.id }))}>{color.name}</button> </span>
                             ))}</li>
                             <li>{model.versions.map(version => (
-                                <span key={version.id}><button onClick={() => setAttribute(prevState => ({ ...prevState, version: version.name,versionId:version.id , model: model.id, brand: brand.id }))}>{version.name}</button> </span>
+                                <span key={version.id}><button onClick={() => setAttribute(prevState => ({ ...prevState, version: version.name, versionId: version.id, model: model.id, brand: brand.id }))}>{version.name}</button> </span>
                             ))}</li>
                         </ul>
                     </li>
