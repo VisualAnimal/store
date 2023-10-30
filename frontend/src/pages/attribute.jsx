@@ -10,14 +10,15 @@ const GET_BRANDS = gql`
 `
 
 export function DisplayBrnads() {
-    const { loading, error, data } = useQuery(GET_BRANDS)
+    return (<div>43</div>)
+    // const { loading, error, data } = useQuery(GET_BRANDS)
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error : {error.message}</p>;
+    // if (loading) return <p>Loading...</p>;
+    // if (error) return <p>Error : {error.message}</p>;
 
-    return data.brands.map(brand => (
-        <h1>{brand.name}</h1>
-    ))
+    // return data.brands.map(brand => (
+    //     <h1>{brand.name}</h1>
+    // ))
 }
 
 export default function Attribute() {
