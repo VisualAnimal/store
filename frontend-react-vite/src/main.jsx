@@ -5,6 +5,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 import Attribute from './routes/attribute';
 import List from './routes/list';
 import Product from './routes/product';
+import './index.css'
 
 const client = new ApolloClient({
   uri: 'http://45.207.38.55:3000/api/graphql',
